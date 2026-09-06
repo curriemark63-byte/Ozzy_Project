@@ -19,3 +19,12 @@ Confirm SearXNG's JSON API is responding at your local instance URL
 Load Mistral 7B in LM Studio and start its local server
 Run python ozzy_chat.py
 requirements.txt should list whatever your scripts actually import, at minimum probably requests for the SearXNG calls and whatever library your LM Studio connection uses.
+
+Docker / SearXNG Setup:
+Pull and run the SearXNG image with a persistent config volume:
+Code
+Copy the generated settings.yml out of the container to edit it locally (or edit it directly in the mounted volume).
+In settings.yml, add a search: formats: block enabling both html and json, so the API can be queried programmatically:
+Code
+Restart the container so the config change takes effect.
+Confirm it's working by visiting http://localhost:8080 in a browser, then testing the JSON endpoint directly (e.g. http://localhost:8080/search?q=test&format=json).
